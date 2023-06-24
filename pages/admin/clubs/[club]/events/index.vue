@@ -18,10 +18,10 @@
                     </Column>
                     <Column header="Akcije">
                         <template #body="slotProps">
-                            <nuxt-link :to="`/admin/events/${slotProps.data.id}`">
+                            <nuxt-link :to="`/admin/clubs/${route.params.club}/events/${slotProps.data.id}`">
                                 <Button icon="pi pi-pencil" severity="info" />
                             </nuxt-link>
-                            <nuxt-link :to="`/admin/events/${slotProps.data.id}/reservations`">
+                            <nuxt-link :to="`/admin/clubs/${route.params.club}/events/${slotProps.data.id}/reservations`">
                                 <Button icon="pi pi-calendar" severity="warning" />
                             </nuxt-link>
                             <Button icon="pi pi-trash" severity="danger" @click="deleteEvent(slotProps.data.id)" />

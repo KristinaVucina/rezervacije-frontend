@@ -3,7 +3,7 @@ export const useEvents = () => {
     const event = useState<any>('event', () => null)
 
     const getEvents = async (eventId: number) => {
-        const { data } = await useApi('api/events/' + eventId + '/events')
+        const { data } = await useApi('api/clubs/' + eventId + '/events')
         events.value = data.value
     }
 
