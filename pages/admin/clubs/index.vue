@@ -19,8 +19,13 @@
                     <Column header="Akcije">
                         <template #body="slotProps">
                             <nuxt-link :to="`/admin/clubs/${slotProps.data.id}`">
-                                <Button icon="pi pi-credit-card" severity="info" label="Detalji" />
+                                <Button icon="pi pi-pencil" severity="info" label="Uredi" />
                             </nuxt-link>
+                            <nuxt-link :to="`/admin/clubs/${slotProps.data.id}/events`">
+                                <Button icon="pi pi-calendar" severity="warning" label="Dogadjaji" />
+                            </nuxt-link>
+                                <Button icon="pi pi-trash" severity="danger" label="Obrisi" @click="deleteClub(slotProps.data.id)" />
+
                         </template>
                     </Column>
                 </DataTable>
@@ -33,6 +38,10 @@
 const clubs = computed(() => useClubs().clubs.value)
 
 useClubs().getClubs()
+
+const deleteClub = (id) => {
+    useClubs().deleteClub(id)
+} 
 
 const columns = ref([
     { field: 'name', header: 'Naziv', sortable: false },
