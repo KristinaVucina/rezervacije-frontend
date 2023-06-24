@@ -45,7 +45,7 @@ const schema = [
 const form = {};
 
 const submitHandler = async () => {
-  await useAuth().login(form);
+  await useAuth().login(form as LoginData);
   navigateTo("/");
 };
 </script>

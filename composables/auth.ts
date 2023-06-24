@@ -12,11 +12,22 @@ export const useAuth = () => {
             body: JSON.stringify(loginData)
         })
         await getUser()
+        navigateTo('/')
+    }
+
+    const register = async (registerData: RegisterData) => {
+        await useApi('register', {
+            method: 'POST',
+            body: JSON.stringify(registerData)
+        })
+        await getUser()
+        navigateTo('/')
     }
 
     return {
         user,
         getUser,
-        login
+        login,
+        register
     }
 };
