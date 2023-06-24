@@ -19,8 +19,12 @@
                     <Column header="Akcije">
                         <template #body="slotProps">
                             <nuxt-link :to="`/admin/events/${slotProps.data.id}`">
-                                <Button icon="pi pi-credit-card" severity="info" label="Detalji" />
+                                <Button icon="pi pi-pencil" severity="info" />
                             </nuxt-link>
+                            <nuxt-link :to="`/admin/events/${slotProps.data.id}/reservations`">
+                                <Button icon="pi pi-calendar" severity="warning" />
+                            </nuxt-link>
+                            <Button icon="pi pi-trash" severity="danger" @click="deleteEvent(slotProps.data.id)" />
                         </template>
                     </Column>
                 </DataTable>
@@ -35,6 +39,9 @@ const route = useRoute()
 
 useEvents().getEvents(parseInt(route.params.club))
 
+const deleteEvent = (id) => {
+    useEvents().deleteEvent(id)
+}
 const columns = ref([
     { field: 'name', header: 'Naziv', sortable: false },
     { field: 'description', header: 'Opis', sortable: false },

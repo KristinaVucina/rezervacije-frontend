@@ -2,7 +2,7 @@
     <div class="flex justify-center max-h-screen h-screen">
         <Card class="self-center">
             <template #title>
-                <h1>Uredi klub</h1>
+                <h1>Novi dogadjaj</h1>
             </template>
             <template #content>
                 <FormKit id="registerForm" v-model="form" type="form" :submit-attrs="{
@@ -36,31 +36,25 @@
 </template>
   
 <script setup>
+// $validated = $request->validate([
+//     'name' => ['required', 'string'],
+//     'email' => ['required', 'email', 'unique:events,email'],
+//     'url' => ['nullable', 'url'],
+//     'slug' => ['required', 'string', 'unique:events,slug'],
+//     'image_url' => ['nullable', 'url'],
+//     'reservations_until' => ['required', 'date_format:H:i'],
+//     'max_person_count' => ['required', 'integer', 'min:0'],
+//     'capacity' => ['required', 'integer', 'min:0'],
+//     'owner_id' => ['required', 'exists:users,id'],
+// ]);
+const user = useUser();
 const form = ref({});
-const route = useRoute()
 
-const fillForm = async () => {
-    await useClubs().getClub(parseInt(route.params.club));
-    const club = useState('club');
-    form.value = {
-        id: club.value.id,
-        name: club.value.name,
-        email: club.value.email,
-        url: club.value.url,
-        slug: club.value.slug,
-        image_url: club.value.image_url,
-        reservations_until: club.value.reservations_until,
-        max_person_count: club.value.max_person_count,
-        capacity: club.value.capacity,
-        owner_id: club.value.owner_id
-    }
-};
-
-fillForm()
 
 const submitHandler = async () => {
-    await useClubs().update(form.value);
-    await navigateTo("/admin/clubs");
+    form.value.owner_id = user.value.id;
+    await useEvents().create(form.value);
+    await navigateTo("/admin/events");
 };
 </script>
 

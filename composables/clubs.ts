@@ -21,7 +21,7 @@ export const useClubs = () => {
     }
 
     const update = async (club: any) => {
-        const { data } = await useApi('api/clubs/'+club.id, {
+        const { data } = await useApi('api/clubs/' + club.id, {
             method: 'PUT',
             body: JSON.stringify(club)
         })
@@ -29,7 +29,7 @@ export const useClubs = () => {
     }
 
     const deleteClub = async (id: number) => {
-        const { data } = await useApi('api/clubs/'+id, {
+        const { data } = await useApi('api/clubs/' + id, {
             method: 'DELETE'
         })
         clubs.value.splice(clubs.value.findIndex((c: any) => c.id === id), 1)
