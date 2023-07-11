@@ -14,7 +14,7 @@ export const useAuth = () => {
         await getUser()
         navigateTo('/')
     }
-
+    
     const register = async (registerData: RegisterData) => {
         await useApi('register', {
             method: 'POST',

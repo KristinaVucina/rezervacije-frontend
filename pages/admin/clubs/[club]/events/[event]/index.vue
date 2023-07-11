@@ -55,7 +55,8 @@ const fillForm = async () => {
         reservations_until: event.value.reservations_until,
         max_person_count: event.value.max_person_count,
         capacity: event.value.capacity,
-        owner_id: event.value.owner_id
+        owner_id: event.value.owner_id,
+        club_id: event.value.club_id
     }
 };
 

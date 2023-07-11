@@ -37,6 +37,7 @@ export const useClubs = () => {
 
     return {
         clubs,
+        club,
         getClubs,
         getClub,
         create,
