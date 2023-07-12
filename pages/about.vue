@@ -57,7 +57,7 @@
         </div>
         <div class="col-2">
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="kristina.jpg" alt="Card image cap" style="height: 400px">
+        <!--<img class="card-img-top" src="kristina.jpg" alt="Card image cap" style="height: 400px"> -->
         <div class="card-body">
             <h5 class="card-title">Kristina Vučina</h5>
             <p class="card-text">
@@ -73,7 +73,7 @@
         <div class="col-2">
 
         <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="anamarija.jpg" alt="Card image cap" style="height: 400px">
+       <!-- <img class="card-img-top" src="anamarija.jpg" alt="Card image cap" style="height: 400px"> -->
         <div class="card-body">
             <h5 class="card-title">Anamarija Bevanda</h5>
             <p class="card-text">
