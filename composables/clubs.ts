@@ -2,8 +2,8 @@ export const useClubs = () => {
     const clubs = useState<any>('clubs', () => [])
     const club = useState<any>('club', () => null)
 
-    const getClubs = async () => {
-        const { data } = await useApi('api/clubs')
+    const getClubs = async (search: string = '') => {
+        const { data } = await useApi('api/clubs',{params:{search:search}})
         clubs.value = data.value
     }
 

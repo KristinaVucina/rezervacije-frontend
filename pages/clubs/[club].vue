@@ -16,10 +16,10 @@
   
 <script setup>
 const route = useRoute()
-await useClubs().getClub(parseInt(route.params.club))
+ useClubs().getClub(parseInt(route.params.club))
 const club = computed(()=>useClubs().club.value)
 
-await useEvents().getEvents(parseInt(route.params.club))
+useEvents().getEvents(parseInt(route.params.club))
 const events = computed(()=>useEvents().events.value)
 
 const responsiveOptions = ref([

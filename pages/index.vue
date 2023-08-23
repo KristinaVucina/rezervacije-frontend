@@ -1,26 +1,40 @@
 <template>
   <div>
     <!-- Title is Rezervacije located in top left of the screen bolded add padding above and to the left -->
-    <h1 class="text-5xl font-bold text-white pt-10 pl-10 text-center" >Rezervacije</h1>
+    <h1 class="text-5xl font-bold text-white pt-10 pl-10 text-center">Rezervacije</h1>
     <!-- under is list of clubs with label above Klubovi, they will be in a carousel -->
-    <h3 class="text-2xl font-bold text-white pt-10 pl-10 pb-10">Clubs</h3>
+    <div class="flex align-middle">
+      <h3 class="text-2xl font-bold text-white pt-10 pl-10 pb-10 pr-10">Clubs</h3>
+      <InputText class="h-10 w-96 self-center" v-model="search" placeholder="Search..."></InputText>
+    </div>
     <Carousel :value="clubs" :numVisible="3" :numScroll="1" :responsiveOptions="responsiveOptions">
       <template #item="slotProps">
         <!-- styel with tailwindcss make the slotProps.data.image the background of entire card, and show title and description in white color -->
-        <ClubCard :club="slotProps.data" @click="navigateTo('/clubs/'+slotProps.data.id)" />
+        <ClubCard :club="slotProps.data" @click="navigateTo('/clubs/' + slotProps.data.id)" />
       </template>
     </Carousel>
-    
+
   </div>
 </template>
 
 <script setup>
 
+console.log('test')
+useClubs().getClubs()
 
-await useClubs().getClubs()
+const clubs = computed(() => useClubs().clubs.value)
 
-const clubs = computed(()=>useClubs().clubs.value)
+const search = ref('')
+const searching = ref(false)
 
+
+watch(search, (val) => {
+  if (searching.value) return
+  searching.value = true
+  useClubs().getClubs(val).then(() => {
+    searching.value = false
+  })
+})
 
 const responsiveOptions = ref([
   {

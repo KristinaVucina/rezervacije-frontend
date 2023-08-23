@@ -2,6 +2,8 @@ export const useAuth = () => {
     const user = useState<any>('user', () => null)
 
     const getUser = async () => {
+        if(useUser().value !== null && useUser().value!==undefined) return
+
         const { data } = await useApi('api/user')
         user.value = data.value
     }
@@ -11,7 +13,7 @@ export const useAuth = () => {
             method: 'POST',
             body: JSON.stringify(loginData)
         })
-        await getUser()
+        // await getUser()
         navigateTo('/')
     }
     
@@ -20,7 +22,7 @@ export const useAuth = () => {
             method: 'POST',
             body: JSON.stringify(registerData)
         })
-        await getUser()
+        // await getUser()
         navigateTo('/')
     }
 

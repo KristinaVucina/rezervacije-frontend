@@ -24,7 +24,7 @@ const props = defineProps({
 await useAuth().getUser()
 const user = computed(()=>useAuth().user.value)
 const createReservation = ()=>{
-    useReservations().create({person_count: personCount.value, event_id: props.event.id, user_id: user.value.id})
+    useReservations().create({person_count: personCount.value, event_id: props.event.id, user_id: 1})
 }
 const personCount = ref(0)
 const visible = ref(false);
