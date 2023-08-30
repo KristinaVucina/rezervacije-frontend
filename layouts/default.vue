@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 
-const userName = computed(()=>(useUser().value as any).name ?? '')
+const userName = computed(()=>(useUser().value as any)?.name ?? '')
 
 
 const menu = ref();
@@ -39,6 +39,11 @@ const items = ref([
     label: 'Admin',
     icon: 'pi pi-fw pi-cog',
     to: '/admin/clubs'
+  },
+  {
+    label: 'Korisnici',
+    icon: 'pi pi-fw pi-user',
+    to: '/admin/users'
   }
 ],
 );

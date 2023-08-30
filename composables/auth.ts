@@ -26,10 +26,12 @@ export const useAuth = () => {
         navigateTo('/')
     }
 
+
+
     return {
         user,
         getUser,
         login,
-        register
+        register,
     }
 };
