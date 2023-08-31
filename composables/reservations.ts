@@ -28,11 +28,13 @@ export const useReservations = () => {
         reservations.value.splice(reservations.value.findIndex((c: any) => c.id === (data.value as any).id), 1, data.value)
     }
 
-    const deleteReservation = async (id: number) => {
+    const deleteReservation = async (id: number, splice: boolean = true) => {
         const { data } = await useApi('api/reservations/' + id, {
             method: 'DELETE'
         })
-        reservations.value.splice(reservations.value.findIndex((c: any) => c.id === id), 1)
+        if(splice){
+            reservations.value.splice(reservations.value.findIndex((c: any) => c.id === id), 1)
+        }
     }
 
     return {

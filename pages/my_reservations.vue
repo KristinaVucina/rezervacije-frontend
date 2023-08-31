@@ -2,7 +2,7 @@
     <div>
         <Card class="px-10">
             <template #title>
-                <h1>Rezervacije</h1>
+                <h1>Moje rezervacije</h1>
             </template>
             <template #content>
                 <DataTable :value="reservations" class="p-datatable-sm" tableStyle="min-width: 50rem">
@@ -18,9 +18,7 @@
                     </Column>
                     <Column header="Akcije">
                         <template #body="slotProps">
-                            <nuxt-link :to="`/admin/clubs/${route.params.club}/events/${route.params.event}/reservations/${slotProps.data.id}`">
-                                <Button icon="pi pi-pencil" severity="info" />
-                            </nuxt-link>
+                            <Button icon="pi pi-print" severity="info" @click="printReservation(slotProps.data.id)" />
                             <Button icon="pi pi-trash" severity="danger" @click="deleteReservation(slotProps.data.id)" />
                         </template>
                     </Column>
@@ -31,17 +29,22 @@
 </template>
 
 <script  setup>
-const reservations = computed(() => useReservations().reservations.value)
-const route = useRoute()
+const reservations = computed(() => useUser()?.value?.reservations ?? [])
 
-useReservations().getReservations(parseInt(route.params.event))
 
 const deleteReservation = async (id) => {
-    await useReservations().deleteReservation(id)
+    await useReservations().deleteReservation(id, false)
     await useAuth().getUser(true)
 }
+
+const printReservation = (id) => {
+    useClubs().printClub(id)
+}
+
 const columns = ref([
-    { field: 'user.name', header: 'Rezervirao', sortable: false },
+    { field: 'event.club.name', header: 'Klub', sortable: false },
+    { field: 'event.name', header: 'Dogadjaj', sortable: false },
     { field: 'person_count', header: 'Broj osoba', sortable: false },
 ])
+
 </script>

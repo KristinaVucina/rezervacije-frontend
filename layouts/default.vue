@@ -23,6 +23,7 @@
 const userName = computed(()=>(useUser().value as any)?.name ?? '')
 
 
+
 const menu = ref();
 
 const toggle = (event:any) => {
@@ -31,7 +32,7 @@ const toggle = (event:any) => {
 
 const items = ref([
   {
-    label: 'Home',
+    label: 'Početna',
     icon: 'pi pi-fw pi-home',
     to: '/'
   },
@@ -50,7 +51,12 @@ const items = ref([
 
 const itemsUser = ref([
   {
-    label: 'Logout',
+    label: 'Moje rezervacije',
+    icon: 'pi pi-fw pi-calendar',
+    to: '/my_reservations'
+  },
+  {
+    label: 'Odjava',
     icon: 'pi pi-fw pi-sign-out',
   }
 ],
