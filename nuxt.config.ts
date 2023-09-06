@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: { enabled: true },
-    ssr: true,
     runtimeConfig: {
         // The private keys which are only available within server-side
         // apiUrl: '',

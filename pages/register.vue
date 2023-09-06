@@ -56,10 +56,10 @@
     },
   ];
   
-  const form = {};
+  const form = ref({});
   
   const submitHandler = async () => {
-    await useAuth().register(form as RegisterData);
+    await useAuth().register(form.value as RegisterData);
     navigateTo("/");
   };
   </script>

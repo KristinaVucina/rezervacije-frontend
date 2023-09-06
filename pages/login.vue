@@ -42,11 +42,12 @@ const schema = [
   },
 ];
 
-const form = {};
+const form = ref({});
 
-const submitHandler = async () => {
-  await useAuth().login(form as LoginData);
-  navigateTo("/");
+const submitHandler =  () => {
+  useAuth().login(form.value as LoginData).then(()=>{
+    navigateTo("/");
+  })
 };
 </script>
   
