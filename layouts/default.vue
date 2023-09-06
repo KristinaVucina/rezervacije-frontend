@@ -21,6 +21,8 @@
 
 <script lang="ts" setup>
 
+
+useAuth().getUser()
 const userName = computed(() => (useUser().value as any)?.name ?? '')
 
 const menu = ref();

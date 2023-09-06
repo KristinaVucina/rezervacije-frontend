@@ -1,0 +1,1 @@
+import{i as a}from"./entry.fc29d407.js";const r=()=>a("user",()=>null),l=n=>{var e,o;const s=r();return(o=(e=s==null?void 0:s.value)==null?void 0:e.roles)==null?void 0:o.some(t=>n.includes(t.name))};export{l as h,r as u};
