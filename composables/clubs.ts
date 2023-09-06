@@ -15,15 +15,15 @@ export const useClubs = () => {
     const create = async (club: any) => {
         const { data } = await useApi('api/clubs', {
             method: 'POST',
-            body: JSON.stringify(club)
+            body: club
         })
         clubs.value.push(data.value)
     }
 
-    const update = async (club: any) => {
-        const { data } = await useApi('api/clubs/' + club.id, {
-            method: 'PUT',
-            body: JSON.stringify(club)
+    const update = async (id: any,club: any) => {
+        const { data } = await useApi('api/clubs/' + id, {
+            method: 'POST',
+            body: club
         })
         clubs.value.splice(clubs.value.findIndex((c: any) => c.id === (data.value as any).id), 1, data.value)
     }

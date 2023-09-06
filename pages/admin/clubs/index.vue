@@ -12,6 +12,9 @@
                                  @click="getClient(<string>search)"
                                  @keydown.enter="getClient(<string>search)"
                         /> -->
+                        <nuxt-link :to="`/admin/clubs/new`">
+                            <Button icon="pi pi-plus" severity="info" />
+                        </nuxt-link> 
                     </template>
                     <Column v-for="column in columns" :key="column.field" :field="column.field" :header="column.header"
                         :sortable="column.sortable">
@@ -24,16 +27,20 @@
                             <nuxt-link :to="`/admin/clubs/${slotProps.data.id}/events`">
                                 <Button icon="pi pi-calendar" severity="warning" />
                             </nuxt-link>
-                            <Button icon="pi pi-trash" severity="danger" @click="deleteClub(slotProps.data.id)" />
+                            <Button icon="pi pi-trash" severity="danger" @click="confirm1(slotProps.data.id)" />
                         </template>
                     </Column>
                 </DataTable>
             </template>
         </Card>
+        <ConfirmDialog></ConfirmDialog>
     </div>
 </template>
 
+
 <script  setup>
+import { useConfirm } from 'primevue/useconfirm';
+
 const clubs = computed(() => useClubs().clubs.value)
 
 useClubs().getClubs()
@@ -41,6 +48,21 @@ useClubs().getClubs()
 const deleteClub = (id) => {
     useClubs().deleteClub(id)
 }
+
+const confirm = useConfirm();
+
+const confirm1 = (id) => {
+    confirm.require({
+        message: 'Jeste li sigurni?',
+        header: 'Potvrda brisanja',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            deleteClub(id)
+        },
+        reject: () => {
+        }
+    });
+};
 
 const columns = ref([
     { field: 'name', header: 'Naziv', sortable: false },

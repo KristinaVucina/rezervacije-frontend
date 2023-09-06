@@ -1,9 +1,10 @@
 <template>
   <div>
-    <Menubar :model="items">
+    <Menubar :model="items" v-if="user && permissionCheck">
       <template #end>
         <div class="card flex justify-content-center">
-          <Button type="button" severity="secondary" :label="userName" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" text />
+          <Button type="button" severity="secondary" :label="userName" @click="toggle" aria-haspopup="true"
+            aria-controls="overlay_menu" text />
           <Menu ref="menu" id="overlay_menu" :model="itemsUser" :popup="true" />
         </div>
       </template>
@@ -20,40 +21,45 @@
 
 <script lang="ts" setup>
 
-const userName = computed(()=>(useUser().value as any)?.name ?? '')
-
-
+const userName = computed(() => (useUser().value as any)?.name ?? '')
 
 const menu = ref();
 
-const toggle = (event:any) => {
-    menu.value.toggle(event);
+const toggle = (event: any) => {
+  menu.value.toggle(event);
 };
+const user = computed(() => useUser().value)
+const permissionCheck = computed(() => hasAnyRole(['admin', 'superadmin', 'user']))
 
-const items = ref([
-  {
-    label: 'Početna',
-    icon: 'pi pi-fw pi-home',
-    to: '/'
-  },
-  {
-    label: 'Admin',
-    icon: 'pi pi-fw pi-cog',
-    to: '/admin/clubs'
-  },
-  {
-    label: 'Korisnici',
-    icon: 'pi pi-fw pi-user',
-    to: '/admin/users'
-  }
-],
-);
+const items = computed(() => {
+  let items = [
+    {
+      label: 'Početna',
+      icon: 'pi pi-fw pi-home',
+      to: '/',
+      roles: ['user', 'admin', 'superadmin']
+    },
+    {
+      label: 'Admin',
+      icon: 'pi pi-fw pi-cog',
+      to: '/admin/clubs',
+      roles: ['admin', 'superadmin']
+    },
+    {
+      label: 'Korisnici',
+      icon: 'pi pi-fw pi-user',
+      to: '/admin/users',
+      roles: ['superadmin']
+    }
+  ]
+  return items.filter(item => hasAnyRole(item.roles));
+});
 
 const itemsUser = ref([
   {
     label: 'Moje rezervacije',
     icon: 'pi pi-fw pi-calendar',
-    to: '/my_reservations'
+    to: '/my_reservations',
   },
   {
     label: 'Odjava',

@@ -56,9 +56,22 @@ const form = ref({});
 const route = useRoute()
 
 const submitHandler = async () => {
-    form.value.club_id = parseInt(route.params.club);
+
+    const formData = new FormData();
+    
     form.value.date = form.value.date.toISOString().split('T')[0];
-    await useEvents().create(form.value);
+    
+    Object.entries(form.value).forEach(([key, value]) => {
+        if(key === "image" && value && value[0]?.file) {
+            formData.append(key, value[0].file);
+            return;
+        }
+        formData.append(key, value);
+    });
+
+    formData.append("club_id", parseInt(route.params.club))
+
+    await useEvents().create(formData);
     await navigateTo("/admin/clubs/" + route.params.club + "/events");
 };
 </script>

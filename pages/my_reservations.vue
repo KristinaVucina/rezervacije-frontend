@@ -18,12 +18,14 @@
                     </Column>
                     <Column header="Akcije">
                         <template #body="slotProps">
-                            <Button icon="pi pi-print" severity="info" @click="printReservation(slotProps.data.id)" />
                             <Button icon="pi pi-trash" severity="danger" @click="deleteReservation(slotProps.data.id)" />
                         </template>
                     </Column>
                 </DataTable>
             </template>
+        </Card>
+        <Card id="printMe">
+            <h1>Print me!</h1>
         </Card>
     </div>
 </template>
@@ -35,10 +37,6 @@ const reservations = computed(() => useUser()?.value?.reservations ?? [])
 const deleteReservation = async (id) => {
     await useReservations().deleteReservation(id, false)
     await useAuth().getUser(true)
-}
-
-const printReservation = (id) => {
-    useClubs().printClub(id)
 }
 
 const columns = ref([

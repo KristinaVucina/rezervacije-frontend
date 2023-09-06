@@ -56,6 +56,8 @@ const deleteUser = (id) => {
 
 const syncRoles = (roles, id) => {
     useUsers().syncRoles(roles, id)
+    useUsers().getUsers()
+    visible.value = false
 }
 
 

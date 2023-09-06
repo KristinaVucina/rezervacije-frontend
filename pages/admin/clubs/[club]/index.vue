@@ -18,8 +18,8 @@
                         <FormKit type="primeInputText" name="email" label="Email" v-model="form.email" help="Email kluba" />
                     </div>
                     <div class="double">
-                        <FormKit type="primeInputText" name="image_url" label="Link na sliku" v-model="form.image_url"
-                            help="URL slike kluba" />
+                        <FormKit type="file" accept=".jpg,.jpeg,.png,.svg" name="image" label="Slika kluba" v-model="form.image"
+                            help="Slika kluba" />
                         <FormKit type="primeInputText" name="reservations_until" label="Rezervacije do"
                             v-model="form.reservations_until" help="Rezervacije do" />
                     </div>
@@ -48,7 +48,6 @@ const fillForm = async () => {
         email: club.value.email,
         url: club.value.url,
         slug: club.value.slug,
-        image_url: club.value.image_url,
         reservations_until: club.value.reservations_until,
         max_person_count: club.value.max_person_count,
         capacity: club.value.capacity,
@@ -59,7 +58,20 @@ const fillForm = async () => {
 fillForm()
 
 const submitHandler = async () => {
-    await useClubs().update(form.value);
+        // create formdata for file
+        const formData = new FormData();
+    
+    Object.entries(form.value).forEach(([key, value]) => {
+        if(key === "image" && value && value[0]?.file) {
+            formData.append(key, value[0]?.file);
+            return;
+        }
+        formData.append(key, value);
+    });
+
+    formData.append('_method', 'PUT')
+
+    await useClubs().update(form.value.id,formData);
     await navigateTo("/admin/clubs");
 };
 </script>

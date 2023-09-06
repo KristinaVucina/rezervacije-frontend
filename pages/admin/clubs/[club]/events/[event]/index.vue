@@ -2,7 +2,7 @@
     <div class="flex justify-center max-h-screen h-screen">
         <Card class="self-center">
             <template #title>
-                <h1>Uredi klub</h1>
+                <h1>Uredi Dogadjaj</h1>
             </template>
             <template #content>
                 <FormKit id="registerForm" v-model="form" type="form" :submit-attrs="{
@@ -11,8 +11,7 @@
                     <div class="double">
                         <FormKit type="primeInputText" name="name" label="Naziv" v-model="form.name"
                             help="Naziv dogadjaja" />
-                        <FormKit type="primeInputText" name="slug" label="Kratica" v-model="form.slug"
-                            help="Kratica kluba" />
+                        <FormKit type="primeInputText" name="slug" label="Kratica" v-model="form.slug" help="Kratica" />
                     </div>
                     <div class="double">
                         <FormKit type="primeCalendar" name="date" label="Datum" v-model="form.date"
@@ -33,7 +32,8 @@
                         <FormKit type="primeInputText" name="time_end" label="Kraj" v-model="form.time_end"
                             help="Kraj dogadjaja" />
                     </div>
-                </FormKit>            </template>
+                </FormKit>
+            </template>
         </Card>
     </div>
 </template>
@@ -51,7 +51,6 @@ const fillForm = async () => {
         email: event.value.email,
         url: event.value.url,
         slug: event.value.slug,
-        image_url: event.value.image_url,
         reservations_until: event.value.reservations_until,
         max_person_count: event.value.max_person_count,
         capacity: event.value.capacity,
@@ -63,8 +62,19 @@ const fillForm = async () => {
 fillForm()
 
 const submitHandler = async () => {
-    await useEvents().update(form.value);
-    await navigateTo("/admin/clubs/" + route.params.club + "/events" );
+
+    const formData = new FormData();
+
+    Object.entries(form.value).forEach(([key, value]) => {
+        if (key === "image" && value && value[0]?.file) {
+            formData.append(key, value[0]?.file);
+            return;
+        }
+        formData.append(key, value);
+    });
+    formData.append('_method', 'PUT')
+    await useEvents().update(formData);
+    await navigateTo("/admin/clubs/" + route.params.club + "/events");
 };
 </script>
 
