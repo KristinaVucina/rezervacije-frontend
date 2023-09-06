@@ -22,8 +22,8 @@
 
                     </div>
                     <div class="double">
-                        <FormKit type="primeInputText" name="image_url" label="Slika" v-model="form.image_url"
-                            help="URL slike" />
+                        <FormKit type="file" accept=".jpg,.jpeg,.png,.svg" name="image" label="Slika dogadjaja" v-model="form.image"
+                            help="Slika dogadjaja" />
                         <FormKit type="primeInputText" name="url" label="URL" v-model="form.url" help="URL" />
                     </div>
 
