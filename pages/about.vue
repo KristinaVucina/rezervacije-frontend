@@ -4,7 +4,7 @@
         <div class="grid grid-cols-2 gap-8">
           <div class="max-w-sm">
             <div class="relative">
-              <img class="w-64 h-64 object-contain" src="kristina.jpg" alt="Kristina Vučina">
+              <img class="w-64 h-64 object-contain" src="/kristina.jpg" alt="Kristina Vučina">
               <div class=" bottom-0 left-0  p-2">
                 <h5 class="text-lg font-semibold">Kristina Vučina</h5>
                 <p class="text-sm">Studetica informatike. Imam 21 godinu. Živim u Mostaru.
@@ -14,7 +14,7 @@
           </div>
           <div class="max-w-sm">
             <div class="relative">
-              <img class="w-64 h-64 object-contain" src="anamarija.jpg" alt="Anamarija Bevanda">
+              <img class="w-64 h-64 object-contain" src="/anamarija.jpg" alt="Anamarija Bevanda">
               <div class=" bottom-0 left-0 p-2">
                 <h5 class="text-lg font-semibold">Anamarija Bevanda</h5>
                 <p class="text-sm">Studentica informatike. Imam 21 godinu. Dolazim iz Međugorja.
