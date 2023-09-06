@@ -7,6 +7,9 @@
             <template #content>
                 <DataTable :value="events" class="p-datatable-sm" tableStyle="min-width: 50rem">
                     <template #header>
+                        <nuxt-link :to="`/admin/clubs/${route.params.club}/events/new`">
+                            <Button icon="pi pi-plus" severity="info" />
+                        </nuxt-link> 
                         <!-- <InputText type="search" width="100px" class="p-mr-2" placeholder="Pretraži" @keydown.enter="getClient(<string>search)" v-model="search" /> -->
                         <!-- <Button  style="width: 40px !important; margin-left: 10px !important" icon="pi pi-search" severity="help"
                                  @click="getClient(<string>search)"
