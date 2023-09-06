@@ -20,6 +20,7 @@
 <script setup>
 
 console.log('test')
+useAuth().getUser()
 useClubs().getClubs()
 
 const clubs = computed(() => useClubs().clubs.value)
