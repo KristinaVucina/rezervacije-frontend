@@ -5,7 +5,7 @@ export const useAuth = () => {
         // if(useUser().value !== null && useUser().value!==undefined && !refresh) return
         const { data } = await useApi('api/user')
         console.log('data', data)
-        user.value = data.value
+        useState<any>('user', () => data.value)
     }
 
     const login = async (loginData: LoginData) => {
